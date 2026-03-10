@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: slv_yellow_taxi
+    description: Cleaned and typed yellow taxi trips. Filters out invalid records (zero fare, distance, or passengers).
+    columns:
+      - name: trip_id
+        description: Unique identifier for each trip.
+        tests:
+          - unique
+          - not_null
+
+      - name: vendor_id
+        description: ID of the taxi vendor (1 or 2).
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2]
+
+      - name: pickup_datetime
+        description: Timestamp when the trip started.
+        tests:
+          - not_null
+
+      - name: dropoff_datetime
+        description: Timestamp when the trip ended.
+        tests:
+          - not_null
+
+      - name: passenger_count
+        description: Number of passengers.
+        tests:
+          - not_null
+
+      - name: trip_distance
+        description: Distance of the trip in miles.
+        tests:
+          - not_null
+
+      - name: fare_amount
+        description: Base fare charged for the trip.
+        tests:
+          - not_null
+
+      - name: total_amount
+        description: Total amount charged including tips and fees.
+        tests:
+          - not_null
