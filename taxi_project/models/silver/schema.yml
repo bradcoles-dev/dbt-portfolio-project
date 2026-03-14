@@ -35,14 +35,22 @@ models:
       - name: trip_distance
         description: Distance of the trip in miles.
         tests:
-          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "<= 100"
+              column_name: trip_distance
 
       - name: fare_amount
         description: Base fare charged for the trip.
         tests:
-          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 1 and fare_amount <= 500"
+              column_name: fare_amount
 
       - name: total_amount
         description: Total amount charged including tips and fees.
         tests:
-          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "<= 5000"
+              column_name: total_amount
+              config:
+                severity: warn
